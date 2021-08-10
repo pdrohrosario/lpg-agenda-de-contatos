@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 //testando novamente --------------
-//teste_wagner
+//teste_wagner_alterado novamente
 
 typedef struct {
 		char nome[30];
