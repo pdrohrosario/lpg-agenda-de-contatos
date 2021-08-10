@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-//testeeee
+
 
 typedef struct {
 		char nome[30];
