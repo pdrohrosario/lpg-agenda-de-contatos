@@ -26,7 +26,7 @@ int main() {
     while(x>=1){
 		printf("!AGENDA DE CONTATOS!\n");
 		printf("Escolha uma opcao:\n1--Registrar novo contato\n2--Excluir contato existente\n");
-        printf("3--Alterar contator existente\n4--Listar contatos existentes\n5--Fechar Programa\n");
+        printf("3--Alterar contato existente\n4--Listar contatos existentes\n5--Fechar Programa\n");
 		scanf("%i", &opcao);
 		printf("-==================-\n");
 		switch (opcao){
@@ -42,6 +42,7 @@ int main() {
                 fflush(stdin);
                 contato[cont].codigo = cont + 1;
                 cont++;
+                printf("Contato registrado com sucesso! \n\n");
                 break;
             case 2:   //Excluir Contatos
                 printf(" -=!EXCLUIR CONTATO!=- \n");
