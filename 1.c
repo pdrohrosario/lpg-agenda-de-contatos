@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 //testando novamente --------------
-//teste graciotto.
+//teste graciotto
 typedef struct {
 		char nome[30];
 		int celular;
