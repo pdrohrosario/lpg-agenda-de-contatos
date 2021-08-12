@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-//testando novamente --------------
 
 typedef struct {
 		char nome[30];
@@ -12,14 +11,18 @@ typedef struct {
 int listar(Lista contato[], int cont){
     printf(" -=!CONTATOS!=- \n");
     for (int i = 0; i < cont; i++){
-        printf("Codigo de Identificacao: %d\n", contato[i].codigo);
-        printf("Nome: %s\n", contato[i].nome);
-        printf("Celular: %i\n", contato[i].celular);
-        printf("Email: %s\n", contato[i].email);
-        printf("-===========-\n");
+        if(contato[i].codigo>0){
+            printf("Codigo de Identificacao: %d\n", contato[i].codigo);
+            printf("Nome: %s\n", contato[i].nome);
+            printf("Celular: %i\n", contato[i].celular);
+            printf("Email: %s\n", contato[i].email);
+            printf("-===========-\n");
+        }
     }
 }
-
+//Criar uma variavel de validação de contato, assim só podera excluir, alterar ou procurar algum contato caso essa
+//variavel for 1. No inicio do codigo a variavel é 0 e só é setada para 1 na criação de um contato
+//Possivel problema, uma variavel a mais a se guardar no arquivo
 int main() {
 	Lista contato[1000];
     int x=1, opcao, cont=0;
@@ -40,12 +43,21 @@ int main() {
                 printf("Digite o email: ");
                 scanf("%s", &contato[cont].email);
                 fflush(stdin);
+                //Precisa validar o email
                 contato[cont].codigo = cont + 1;
                 cont++;
                 break;
             case 2:   //Excluir Contatos
                 printf(" -=!EXCLUIR CONTATO!=- \n");
                 listar(contato, cont);
+                int excluir;
+                printf("Escolha o codigo do contato que deseja excluir: ");
+                scanf("%i", &excluir);
+                while(excluir < 1 || excluir >= cont+1){ //valida se o codigo existe
+                    printf("Codigo inexistente, tente novamente: ");
+                    scanf("%i", &excluir);
+                }
+                contato[excluir-1].codigo= contato[excluir-1].codigo * -1;
                 break;
             case 3:  //Alterar Contatos
                 printf(" -=!ALTERAR CONTATO EXISTENTE!=- \n");
@@ -57,6 +69,7 @@ int main() {
                 break;
             case 5:    //Fecha o Programa
                 printf("FECHANDO PROGRAMA...\n");
+                //Salvar Dados e entao fecha
                 x=0;
                 break;
             default:   //Não escolheu um numero entre 1 a 5
