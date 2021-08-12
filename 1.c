@@ -82,7 +82,29 @@ int main()
             printf("%i", &alterar);
             validaCodigo(alterar);
 
-            printf("")
+            printf("Deseja alterar: 1- Codigo, 2 - Nome, 3 - Celular, 4 - Email ou 5 - Todas.");
+            scanf("%i",&opcao);
+            switch(opcao){
+            	case 1:
+            		printf("");
+            		break;
+            	case 2:
+					printf("");
+					break;
+				case 3:
+            		printf("");
+            		break;	
+            	case 4:
+            		printf("");
+            		break;
+            	case 5:
+            		printf("");
+            		break;
+            	default:
+            		printf("Ocorreu um erro, tente novamente.");
+			}
+            
+            printf("-===========-\n");
 
             break;
         case 4: //Listar contatos
