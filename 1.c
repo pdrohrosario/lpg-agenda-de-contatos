@@ -19,7 +19,7 @@ int listar(Lista contato[], int cont){
         printf("-===========-\n");
     }
 }
-
+//teste
 int main() {
 	Lista contato[1000];
     int x=1, opcao, cont=0;
