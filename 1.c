@@ -90,12 +90,29 @@ int main()
             int selecione;
             scanf("%d",&selecione);
 
-            switch(selecione){
-                case 1: 
-                    printf("Digite o novo nome: ");
-                    scanf("%s", contato[alterar - 1].nome);
-                    printf("OK! Nome do contato %d alterado para %s",alterar,contato[alterar].nome);
-                    break;
+            printf("Deseja alterar: 1- Codigo, 2 - Nome, 3 - Celular, 4 - Email ou 5 - Todas.");
+            scanf("%i",&opcao);
+            switch(opcao){
+            	case 1:
+            		printf("");
+            		break;
+            	case 2:
+					printf("");
+					break;
+				case 3:
+            		printf("");
+            		break;	
+            	case 4:
+            		printf("");
+            		break;
+            	case 5:
+            		printf("");
+            		break;
+            	default:
+            		printf("Ocorreu um erro, tente novamente.");
+			}
+            
+            printf("-===========-\n");
 
                 case 2:
                     printf("Digite o novo email: ");
