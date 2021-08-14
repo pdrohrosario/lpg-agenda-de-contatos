@@ -10,15 +10,22 @@ typedef struct
 } Lista;
 
 //Função que válida se o código de usuário
-int validaCodigo(int codigo)
+int validaCodigo(int cont)
 {
+    int codigo;
+    printf("Escolha o codigo do contato que deseja alterar:");
+    scanf("%i", &codigo);
+
     while (codigo < 1 || codigo >= cont + 1)
     { //valida se o codigo existe
         printf("Codigo inexistente, tente novamente: ");
-        scanf("%i", &alterar);
+        scanf("%i", &codigo);
     }
+    return codigo;
 }
 
+
+//Função que lista os contatos
 int listar(Lista contato[], int cont)
 {
     printf(" -=!CONTATOS!=- \n");
@@ -64,36 +71,71 @@ int main()
             contato[cont].codigo = cont + 1;
             cont++;
             break;
+
         case 2: //Excluir Contatos
             printf(" -=!EXCLUIR CONTATO!=- \n");
             listar(contato, cont);
-            int excluir;
-            printf("Escolha o codigo do contato que deseja excluir: ");
-            scanf("%i", &excluir);
-            validaCodigo(excluir);
-
+            int excluir = validaCodigo(cont);
             contato[excluir - 1].codigo = contato[excluir - 1].codigo * -1;
             break;
+
         case 3: //Alterar Contatos
             printf(" -=!ALTERAR CONTATO EXISTENTE!=- \n");
             listar(contato, cont); //printa os contatos com numero na frente
-            int alterar;
-            printf("Escolha o codigo do contato que deseja alterar:");
-            printf("%i", &alterar);
-            validaCodigo(alterar);
+            int alterar = validaCodigo(cont);
+            printf("Digite: 1 para alterar nome. \n");
+            printf("Digite: 2 para alterar email. \n");
+            printf("Digite: 3 para alterar celular. \n");
+            printf("Digite: 4 para alterar todas as informações acima. \n");
+            int selecione;
+            scanf("%d",&selecione);
 
-            printf("")
+            switch(selecione){
+                case 1: 
+                    printf("Digite o novo nome: ");
+                    scanf("%s", contato[alterar - 1].nome);
+                    printf("OK! Nome do contato %d alterado para %s",alterar,contato[alterar].nome);
+                    break;
 
+                case 2:
+                    printf("Digite o novo email: ");
+                    scanf("%s", contato[alterar - 1].email);
+                    //validar novo email
+                    printf("OK! Nome do contato %d alterado para %s",alterar,contato[alterar].email);
+                    break;
+
+                case 3:
+                    printf("Digite o novo celular: ");
+                    scanf("%s", contato[alterar - 1].celular);
+                    printf("OK! Nome do contato %d alterado para %s",alterar,contato[alterar].celular);
+                    break;
+
+                case 4:
+                    printf("Digite o novo nome: ");
+                    scanf("%s", contato[alterar - 1].nome);
+                    printf("Digite o novo email: ");
+                    scanf("%s", contato[alterar - 1].email);
+                    printf("Digite o novo celular: ");
+                    scanf("%s", contato[alterar - 1].celular);
+                    printf("OK! Informações do contato %d alteradas");
+                    break;
+
+                default:
+                    printf("Ocorreu um erro, tente novamente");
+            }
             break;
+
         case 4: //Listar contatos
             printf(" -=!LISTAR CONTATOS!=- \n");
             listar(contato, cont);
             break;
+
         case 5: //Fecha o Programa
             printf("FECHANDO PROGRAMA...\n");
             //Salvar Dados e entao fecha
             x = 0;
             break;
+
         default: //Não escolheu um numero entre 1 a 5
             printf("Opcao invalida, tente novamente!\n");
             break;
