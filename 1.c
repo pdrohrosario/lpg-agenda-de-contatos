@@ -138,14 +138,14 @@ int main()
             if(arquivo == NULL){ //Cria arquivo se n existir
                 printf("Criando arquivo...\n");
                 FILE *arquivo = fopen("contato.txt","w"); //Cria arq se n tiver e apaga anterior
-                char teste[34]="Criado";
+                char teste[34]="Criado Teste";
                 int retorno = fputs(teste,arquivo);
                 fclose(arquivo);
             } else{  //Le o arquivo existente
                 
             }
             fclose(arquivo);
-            //Salvar Dados e entao fecha a
+            //Salvar Dados e entao fecha
             x = 0;
             break;
 
