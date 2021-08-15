@@ -142,15 +142,10 @@ int main()
                 int retorno = fputs(teste,arquivo);
                 fclose(arquivo);
             } else{  //Le o arquivo existente
-                /*
-                char *retorno = fgets(texto,36,Variavel);
-                if (retorno != NULL) {
-                    printf("Lido: %s\n", texto);
-                } */
                 
             }
             fclose(arquivo);
-            //Salvar Dados e entao fecha
+            //Salvar Dados e entao fecha a
             x = 0;
             break;
 
