@@ -133,7 +133,23 @@ int main()
             break;
 
         case 5: //Fecha o Programa
-            printf("FECHANDO PROGRAMA...\n");
+            printf("SALVANDO PROGRAMA...\n");
+            FILE *arquivo = fopen("contatos.txt","r");
+            if(arquivo == NULL){ //Cria arquivo se n existir
+                printf("Criando arquivo...\n");
+                FILE *arquivo = fopen("contato.txt","w"); //Cria arq se n tiver e apaga anterior
+                char teste[34]="Criado";
+                int retorno = fputs(teste,arquivo);
+                fclose(arquivo);
+            } else{  //Le o arquivo existente
+                /*
+                char *retorno = fgets(texto,36,Variavel);
+                if (retorno != NULL) {
+                    printf("Lido: %s\n", texto);
+                } */
+                
+            }
+            fclose(arquivo);
             //Salvar Dados e entao fecha
             x = 0;
             break;
