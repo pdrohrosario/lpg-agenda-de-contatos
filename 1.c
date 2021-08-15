@@ -111,17 +111,19 @@ int main()
                     break;
 
                 case 4:
-                    printf("Digite o novo nome: ");
-                    scanf("%s", contato[alterar - 1].nome);
-                    printf("Digite o novo email: ");
-                    scanf("%s", contato[alterar - 1].email);
-                    printf("Digite o novo celular: ");
-                    scanf("%i", contato[alterar - 1].celular);
-                    printf("OK! Informações do contato %d alteradas");
+                    printf("Digite o nome: ");
+                    scanf("%s", &contato[alterar - 1].nome);
+                    fflush(stdin);
+                    printf("Digite o numero: ");
+                    scanf("%i", &contato[alterar - 1].celular);
+                    printf("Digite o email: ");
+                    scanf("%s", &contato[alterar - 1].email);
+                    fflush(stdin);
+                    printf("OK! Informações do contato alteradas");
                     break;
 
                 default:
-                    printf("Ocorreu um erro, tente novamente");
+                    printf("Ocorreu um erro, tente novamente.\n");
             }
             break;
 
