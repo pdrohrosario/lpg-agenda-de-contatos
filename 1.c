@@ -4,12 +4,12 @@
 typedef struct
 {
     char nome[30];
-    int celular;
+    char celular[12];
     char email[36];
     int codigo;
 } Lista;
 
-
+/*
 int levenshtein(char[], int, char[], int);
 int min(int, int, int);
  
@@ -48,7 +48,7 @@ int min(int a, int b, int c) {
 	}
 
 	return min;
-}
+}*/
 
 //Função que válida se o código de usuário
 int validaCodigo(int cont)
@@ -76,11 +76,31 @@ int listar(Lista contato[], int cont)
         {
             printf("Codigo de Identificacao: %d\n", contato[i].codigo);
             printf("Nome: %s\n", contato[i].nome);
-            printf("Celular: %i\n", contato[i].celular);
+            printf("Celular: %s\n", contato[i].celular);
             printf("Email: %s\n", contato[i].email);
             printf("-===========-\n");
         }
     }
+}
+
+//Função que salva os contatos no arquivo "contato.txt"
+int salvar(Lista contato[], int cont){
+    char pulalinha[2]="\n";
+    FILE *arquivo = fopen("contato.txt","w");
+    for (int i = 0; i < cont; i++){
+        int retorno = fputs(contato[i].nome,arquivo);
+        int pula = fputs(pulalinha,arquivo);
+        int retorno2 = fputs(contato[i].celular,arquivo);
+        int pula2 = fputs(pulalinha,arquivo);
+        char temporario[12];
+        sprintf(temporario, "%i", contato[i].codigo);
+        int retorno3 = fputs(temporario,arquivo);
+        int pula3 = fputs(pulalinha,arquivo);
+        int retorno4 = fputs(contato[i].email,arquivo);
+        int pula4 = fputs(pulalinha,arquivo);
+
+    }
+    fclose(arquivo);
 }
 //Criar uma variavel de validação de contato, assim só podera excluir, alterar ou procurar algum contato caso essa
 //variavel for 1. No inicio do codigo a variavel é 0 e só é setada para 1 na criação de um contato
@@ -89,6 +109,16 @@ int main()
 {
     Lista contato[1000];
     int x = 1, opcao, cont = 0;
+
+    FILE *arquivo = fopen("contato.txt","r"); //Le o arquivo "contato.txt"
+    if(arquivo!=NULL){   //le o arquivo se não estiver em branco
+        /*
+        char texto[36];
+        char *retorno = fgets(contato[cont].nome,'\n',arquivo);
+        printf("Lido:%i\n", cont+1);
+        cont++;*/
+    }
+    fclose(arquivo);
     while (x >= 1)
     {
         printf("!AGENDA DE CONTATOS!\n");
@@ -104,7 +134,7 @@ int main()
             scanf("%s", &contato[cont].nome);
             fflush(stdin);
             printf("Digite o numero: ");
-            scanf("%i", &contato[cont].celular);
+            scanf("%s", &contato[cont].celular);
             printf("Digite o email: ");
             scanf("%s", &contato[cont].email);
             fflush(stdin);
@@ -135,20 +165,20 @@ int main()
                 case 1: 
                     printf("Digite o novo nome: ");
                     scanf("%s", contato[alterar - 1].nome);
-                    printf("OK! Nome do contato %d alterado para %s",alterar,contato[alterar].nome);
+                    printf("OK! Nome do contato %d alterado para %s\n",alterar,contato[alterar-1].nome);
                     break;
 
                 case 2:
                     printf("Digite o novo email: ");
                     scanf("%s", contato[alterar - 1].email);
                     //validar novo email
-                    printf("OK! Email do contato %d alterado para %s",alterar,contato[alterar].email);
+                    printf("OK! Email do contato %d alterado para %s\n",alterar,contato[alterar-1].email);
                     break;
 
                 case 3:
                     printf("Digite o novo celular: ");
-                    scanf("%i", contato[alterar - 1].celular);
-                    printf("OK! Celular do contato %d alterado para %i",alterar,contato[alterar].celular);
+                    scanf("%s", contato[alterar - 1].celular);
+                    printf("OK! Celular do contato %d alterado para %s\n",alterar,contato[alterar-1].celular);
                     break;
 
                 case 4:
@@ -156,11 +186,11 @@ int main()
                     scanf("%s", &contato[alterar - 1].nome);
                     fflush(stdin);
                     printf("Digite o numero: ");
-                    scanf("%i", &contato[alterar - 1].celular);
+                    scanf("%s", &contato[alterar - 1].celular);
                     printf("Digite o email: ");
                     scanf("%s", &contato[alterar - 1].email);
                     fflush(stdin);
-                    printf("OK! Informações do contato alteradas");
+                    printf("OK! Informações do contato alteradas\n");
                     break;
 
                 default:
@@ -179,7 +209,7 @@ int main()
             char pesquisa;
             printf("Digite o nome do contato: \n");
             scanf("%s",&pesquisa);
-
+            /*
             for(int i=0; i<cont; i++){
 
                 char a[36];
@@ -197,24 +227,13 @@ int main()
             for(int i = 0; i <= 100; i++){
                 printf("%c \n", resultadoDaBusca[i]);
             }
-
+            */
             break;
 
-        case 6: //Fecha o Programa
+        case 6: //Salva os contatos e então fecha o Programa
             printf("SALVANDO PROGRAMA...\n");
-            FILE *arquivo = fopen("contatos.txt","r");
-            if(arquivo == NULL){ //Cria arquivo se n existir
-                printf("Criando arquivo...\n sdf");
-                FILE *arquivo = fopen("contato.txt","w"); //Cria arq se n tiver e apaga anterior
-                char teste[34]="Criado Teste\n ttttt";
-                int retorno = fputs(teste,arquivo);
-                fclose(arquivo);
-            } else{  //Le o arquivo existente
-                
-            }
-            fclose(arquivo);
-            //Salvar Dados e entao fecha
-            x = 0;
+            salvar(contato, cont); //salva os contatos
+            x = 0; //sai do while, fechando o programa 
             break;
 
         default: //Não escolheu um numero entre 1 a 5
