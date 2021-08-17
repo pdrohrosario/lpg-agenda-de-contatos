@@ -12,7 +12,6 @@ typedef struct
 
 int levenshtein(char[], int, char[], int);
 int min(int, int, int);
-char pesquisa[];
  
 int levenshtein(char a[], int m, char b[], int n) {
         //Se alguma string for vazia, a diferença é a inserção de todos os caracteres da outra
@@ -176,10 +175,10 @@ int main()
 
         case 5:    
             printf(" -=!LOCALIZAR CONTATOS!=- \n");
+            char resultadoDaBusca[100];
+            char pesquisa;
             printf("Digite o nome do contato: \n");
             scanf("%s",&pesquisa);
-
-            char resultadoDaBusca[100];
 
             for(int i=0; i<cont; i++){
 
