@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct
 {
@@ -109,16 +110,49 @@ int main()
 {
     Lista contato[1000];
     int x = 1, opcao, cont = 0;
-
-    FILE *arquivo = fopen("contato.txt","r"); //Le o arquivo "contato.txt"
+    
+    FILE *arquivo = fopen("contato.txt","r"); //Abre o arquivo apenas para leitura
     if(arquivo!=NULL){   //le o arquivo se não estiver em branco
-        /*
         char texto[36];
-        char *retorno = fgets(contato[cont].nome,'\n',arquivo);
-        printf("Lido:%i\n", cont+1);
-        cont++;*/
+        char temporario;
+        int linha=1, conttexto = 0;
+        do{
+            temporario = getc(arquivo);
+            if(temporario != '\n'){
+                texto[conttexto]=temporario;
+                conttexto++;
+            } else{
+                switch (linha){
+                case 1: //salva nome
+                    strcpy(contato[cont].nome,texto);
+                    //printf("Nome: %s\n", contato[cont].nome); 
+                    break;
+                case 2: //salva celular
+                    strcpy(contato[cont].celular,texto);
+                    //printf("Celular: %s\n", contato[cont].celular);
+                    break;
+                case 3: //salva codigo
+                    contato[cont].codigo = strtol(texto, NULL, 10); //transforma char em int
+                    //printf("Codigo: %i\n", contato[cont].codigo);
+                    break;
+                case 4: //salva email
+                    strcpy(contato[cont].email,texto);
+                    //printf("Email: %s\n", contato[cont].email);
+                    linha=0;
+                    cont++;
+                    break;
+                default:
+                    break;
+                }
+                linha++;
+                conttexto=0;
+                memset(texto, 0, 36); //limpa a variavel texto
+            }
+
+        }while(temporario != EOF); //enquanto não achar o final do arquivo
     }
-    fclose(arquivo);
+    fclose(arquivo); //fecha arquivo
+    
     while (x >= 1)
     {
         printf("!AGENDA DE CONTATOS!\n");
