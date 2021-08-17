@@ -9,6 +9,48 @@ typedef struct
     int codigo;
 } Lista;
 
+
+int levenshtein(char[], int, char[], int);
+int min(int, int, int);
+char pesquisa[];
+ 
+int levenshtein(char a[], int m, char b[], int n) {
+        //Se alguma string for vazia, a diferença é a inserção de todos os caracteres da outra
+		if (m == 0) {
+			return n;
+		}
+        
+		if (n == 0) {
+			return m;
+		}
+        
+		//Se as últimas letras são iguais, verifica a diferença para os demais caracteres das strings
+        if (a[m - 1] == b[n - 1]) {
+            return levenshtein(a, m - 1, b, n - 1);
+		}
+
+        int s = levenshtein(a, m - 1, b, n - 1); //Substitui o último caractere a[m] por b[n]
+        int r = levenshtein(a, m, b, n - 1); //Remove o último caractere a[m]
+        int i = levenshtein(a, m - 1, b, n); //Insere o último caractere b[n] após a[m] 
+
+		//Qualquer operação (substituir, remover ou inserir) implicará em um custo 1
+        return min(s, r, i) + 1;
+}
+
+int min(int a, int b, int c) {
+	int min = a;
+
+	if (min > b) {
+		min = b;
+	}
+
+	if (min > c) {
+		min = c;
+	}
+
+	return min;
+}
+
 //Função que válida se o código de usuário
 int validaCodigo(int cont)
 {
@@ -52,7 +94,7 @@ int main()
     {
         printf("!AGENDA DE CONTATOS!\n");
         printf("Escolha uma opcao:\n1--Registrar novo contato\n2--Excluir contato existente\n");
-        printf("3--Alterar contator existente\n4--Listar contatos existentes\n5--Fechar Programa\n");
+        printf("3--Alterar contator existente\n4--Listar contatos existentes\n5--Localizar Contato\n6--Fechar Programa\n");
         scanf("%i", &opcao);
         printf("-==================-\n");
         switch (opcao)
@@ -132,13 +174,40 @@ int main()
             listar(contato, cont);
             break;
 
-        case 5: //Fecha o Programa
+        case 5:    
+            printf(" -=!LOCALIZAR CONTATOS!=- \n");
+            printf("Digite o nome do contato: \n");
+            scanf("%s",&pesquisa);
+
+            char resultadoDaBusca[100];
+
+            for(int i=0; i<cont; i++){
+
+                char a[36];
+
+                strcpy(a,contato[i].nome);
+                printf("%s",a);
+                int semelhanca = levenshtein(a, strlen(a), pesquisa, strlen(pesquisa));
+                printf("%d\n", semelhanca);
+                if(semelhanca > 0 || (strcmp (pesquisa, a) == 0) ){
+                    strcpy(resultadoDaBusca[semelhanca],a);
+                    printf("%c\n",resultadoDaBusca[semelhanca]);
+                }    
+            }
+
+            for(int i = 0; i <= 100; i++){
+                printf("%c \n", resultadoDaBusca[i]);
+            }
+
+            break;
+
+        case 6: //Fecha o Programa
             printf("SALVANDO PROGRAMA...\n");
             FILE *arquivo = fopen("contatos.txt","r");
             if(arquivo == NULL){ //Cria arquivo se n existir
-                printf("Criando arquivo...\n");
+                printf("Criando arquivo...\n sdf");
                 FILE *arquivo = fopen("contato.txt","w"); //Cria arq se n tiver e apaga anterior
-                char teste[34]="Criado Teste";
+                char teste[34]="Criado Teste\n ttttt";
                 int retorno = fputs(teste,arquivo);
                 fclose(arquivo);
             } else{  //Le o arquivo existente
