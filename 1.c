@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 typedef struct
 {
@@ -103,6 +104,25 @@ int salvar(Lista contato[], int cont){
     }
     fclose(arquivo);
 }
+
+bool validarEmail(char email[36], int cont){
+
+    char *verificaEmail;
+    bool t = false;
+
+    verificaEmail = strchr(email, '@');
+
+
+    if(verificaEmail != NULL){
+        t = true;
+    } else{
+        t = false;
+    }
+
+
+    return t;
+}
+
 //Criar uma variavel de validação de contato, assim só podera excluir, alterar ou procurar algum contato caso essa
 //variavel for 1. No inicio do codigo a variavel é 0 e só é setada para 1 na criação de um contato
 //Possivel problema, uma variavel a mais a se guardar no arquivo
@@ -172,7 +192,13 @@ int main()
             printf("Digite o email: ");
             scanf("%s", &contato[cont].email);
             fflush(stdin);
-            //Precisa validar o email
+            while (validarEmail(contato[cont].email, cont)==false)
+            {
+                printf("E-mail inválido \nDigite o email: ");
+                scanf("%s", &contato[cont].email);
+                fflush(stdin);
+                validarEmail(contato[cont].email, cont);
+            }
             contato[cont].codigo = cont + 1;
             cont++;
             break;
