@@ -18,3 +18,7 @@ teste
 123456
 5
 teste@outlook.com
+afonso
+12345
+6
+afonso@gmail.com

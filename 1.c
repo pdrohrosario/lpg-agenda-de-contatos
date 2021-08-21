@@ -105,20 +105,18 @@ int salvar(Lista contato[], int cont){
     fclose(arquivo);
 }
 
-bool validarEmail(char email[36], int cont){
+bool validarEmail(char email[36]){
 
     char *verificaEmail;
     bool t = false;
 
     verificaEmail = strchr(email, '@');
 
-
     if(verificaEmail != NULL){
         t = true;
     } else{
         t = false;
     }
-
 
     return t;
 }
@@ -177,7 +175,7 @@ int main()
     {
         printf("!AGENDA DE CONTATOS!\n");
         printf("Escolha uma opcao:\n1--Registrar novo contato\n2--Excluir contato existente\n");
-        printf("3--Alterar contator existente\n4--Listar contatos existentes\n5--Localizar Contato\n6--Fechar Programa\n");
+        printf("3--Alterar contato existente\n4--Listar contatos existentes\n5--Localizar Contato\n6--Fechar Programa\n");
         scanf("%i", &opcao);
         printf("-==================-\n");
         switch (opcao)
@@ -192,15 +190,17 @@ int main()
             printf("Digite o email: ");
             scanf("%s", &contato[cont].email);
             fflush(stdin);
-            while (validarEmail(contato[cont].email, cont)==false)
+
+            while (validarEmail(contato[cont].email)==false)
             {
-                printf("E-mail inválido \nDigite o email: ");
+                printf("E-mail invalido \nDigite o email: ");
                 scanf("%s", &contato[cont].email);
                 fflush(stdin);
-                validarEmail(contato[cont].email, cont);
+                validarEmail(contato[cont].email);
             }
             contato[cont].codigo = cont + 1;
             cont++;
+            printf("Contato criado com sucesso!\n");
             break;
 
         case 2: //Excluir Contatos
@@ -217,7 +217,7 @@ int main()
             printf("Digite: 1 para alterar nome. \n");
             printf("Digite: 2 para alterar email. \n");
             printf("Digite: 3 para alterar celular. \n");
-            printf("Digite: 4 para alterar todas as informações acima. \n");
+            printf("Digite: 4 para alterar todas as informacoes acima. \n");
             int selecione;
             scanf("%d",&selecione);
 
@@ -231,7 +231,13 @@ int main()
                 case 2:
                     printf("Digite o novo email: ");
                     scanf("%s", contato[alterar - 1].email);
-                    //validar novo email
+                    while (validarEmail(contato[alterar - 1].email)==false)
+                    {
+                        printf("E-mail invalido \nDigite o email: ");
+                        scanf("%s", &contato[alterar - 1].email);
+                        fflush(stdin);
+                        validarEmail(contato[alterar - 1].email);
+                    }
                     printf("OK! Email do contato %d alterado para %s\n",alterar,contato[alterar-1].email);
                     break;
 
@@ -250,7 +256,14 @@ int main()
                     printf("Digite o email: ");
                     scanf("%s", &contato[alterar - 1].email);
                     fflush(stdin);
-                    printf("OK! Informações do contato alteradas\n");
+                    while (validarEmail(contato[alterar - 1].email)==false)
+                    {
+                        printf("E-mail invalido \nDigite o email: ");
+                        scanf("%s", &contato[alterar - 1].email);
+                        fflush(stdin);
+                        validarEmail(contato[alterar - 1].email);
+                    }
+                    printf("OK! Informacoes do contato alteradas\n");
                     break;
 
                 default:
