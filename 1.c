@@ -11,7 +11,7 @@ typedef struct
     int codigo;
 } Lista;
 
-/*
+
 int levenshtein(char[], int, char[], int);
 int min(int, int, int);
  
@@ -50,7 +50,7 @@ int min(int a, int b, int c) {
 	}
 
 	return min;
-}*/
+}
 
 //Função que válida se o código de usuário
 int validaCodigo(int cont)
@@ -301,7 +301,7 @@ int main()
                    else  
                    {
                        ++jaexiste;
-                       resultadoDaBusca[jaexiste] = i;
+                       resultadoDaBusca[op+jaexiste] = i;
                    }
                 }
                 memset(a,0,50);
