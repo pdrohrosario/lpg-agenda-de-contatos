@@ -283,6 +283,7 @@ int main()
             char pesquisa[50];
             printf("Digite o nome do contato: \n");
             scanf("%s",&pesquisa);
+            printf("\n");
             int jaexiste = 0;
             char vazio[]= " ";
             char a[50] = " ";
@@ -294,7 +295,8 @@ int main()
                 memcpy(a, contato[i].nome, strlen(contato[i].nome)+1);
                 op = levenshtein(a, strlen(a), b, strlen(b));
                 if(op>=1 && op <= 5 || (strcmp (a, b) == 0)){
-                   printf("%d i=%d\n ",op ,i);
+                   printf("%d i=%d\n",op ,i);
+
                    if(resultadoDaBusca[op] == NULL){
                      resultadoDaBusca[op] = i;
                    }
@@ -306,12 +308,16 @@ int main()
                 }
                 memset(a,0,50);
             }
-            
+            int contzero=0;
             for (int i = 0; i < 100; i++){
-                printf("%d ",i);
-                if(resultadoDaBusca[i]!=NULL || i == 0){
+                //printf("%d ",i);
+                if(resultadoDaBusca[i]!=NULL){
                     int posicao = resultadoDaBusca[i];
-                    printf("\n%s\n", contato[posicao].nome);
+                    printf("%s\n", contato[posicao].nome);
+                } else if(resultadoDaBusca[i]== 0 && contzero == 0){
+                    int posicao = resultadoDaBusca[i];
+                    printf("%s\n", contato[0].nome);
+                    ++contzero;
                 }
             }
             
