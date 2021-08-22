@@ -278,29 +278,44 @@ int main()
 
         case 5:    
             printf(" -=!LOCALIZAR CONTATOS!=- \n");
-            char resultadoDaBusca[100];
-            char pesquisa;
+            int resultadoDaBusca[100];
+            int op;
+            char pesquisa[50];
             printf("Digite o nome do contato: \n");
             scanf("%s",&pesquisa);
-            /*
-            for(int i=0; i<cont; i++){
+            int jaexiste = 0;
+            char vazio[]= " ";
+            char a[50] = " ";
+            char b[50] = " ";
 
-                char a[36];
+	        memcpy(b, pesquisa, strlen(pesquisa)+1);
 
-                strcpy(a,contato[i].nome);
-                printf("%s",a);
-                int semelhanca = levenshtein(a, strlen(a), pesquisa, strlen(pesquisa));
-                printf("%d\n", semelhanca);
-                if(semelhanca > 0 || (strcmp (pesquisa, a) == 0) ){
-                    strcpy(resultadoDaBusca[semelhanca],a);
-                    printf("%c\n",resultadoDaBusca[semelhanca]);
-                }    
+            for (int i = 0; i < cont ;i++){
+                memcpy(a, contato[i].nome, strlen(contato[i].nome)+1);
+                op = levenshtein(a, strlen(a), b, strlen(b));
+                if(op>=1 && op <= 5 || (strcmp (a, b) == 0)){
+                   printf("%d i=%d\n ",op ,i);
+                   if(resultadoDaBusca[op] == NULL){
+                     resultadoDaBusca[op] = i;
+                   }
+                   else  
+                   {
+                       ++jaexiste;
+                       resultadoDaBusca[jaexiste] = i;
+                   }
+                }
+                memset(a,0,50);
             }
-
-            for(int i = 0; i <= 100; i++){
-                printf("%c \n", resultadoDaBusca[i]);
+            
+            for (int i = 0; i < 100; i++){
+                printf("%d ",i);
+                if(resultadoDaBusca[i]!=NULL || i == 0){
+                    int posicao = resultadoDaBusca[i];
+                    printf("\n%s\n", contato[posicao].nome);
+                }
             }
-            */
+            
+            memset(resultadoDaBusca,0,100);
             break;
 
         case 6: //Salva os contatos e então fecha o Programa
