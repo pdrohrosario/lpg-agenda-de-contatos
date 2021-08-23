@@ -72,7 +72,7 @@ int validaCodigo(int cont)
 int listar(Lista contato[], int cont)
 {
     printf(" -=!CONTATOS!=- \n");
-    for (int i = 0; i < cont; i++)
+    for (int i = 1; i <= cont; i++)
     {
         if (contato[i].codigo > 0)
         {
@@ -89,7 +89,7 @@ int listar(Lista contato[], int cont)
 int salvar(Lista contato[], int cont){
     char pulalinha[2]="\n";
     FILE *arquivo = fopen("contato.txt","w");
-    for (int i = 0; i < cont; i++){
+    for (int i = 1; i < cont; i++){
         int retorno = fputs(contato[i].nome,arquivo);
         int pula = fputs(pulalinha,arquivo);
         int retorno2 = fputs(contato[i].celular,arquivo);
@@ -121,13 +121,10 @@ bool validarEmail(char email[36]){
     return t;
 }
 
-//Criar uma variavel de validação de contato, assim só podera excluir, alterar ou procurar algum contato caso essa
-//variavel for 1. No inicio do codigo a variavel é 0 e só é setada para 1 na criação de um contato
-//Possivel problema, uma variavel a mais a se guardar no arquivo
 int main()
 {
     Lista contato[1000];
-    int x = 1, opcao, cont = 0;
+    int x = 1, opcao, cont = 1;
     
     FILE *arquivo = fopen("contato.txt","r"); //Abre o arquivo apenas para leitura
     if(arquivo!=NULL){   //le o arquivo se não estiver em branco
@@ -143,19 +140,15 @@ int main()
                 switch (linha){
                 case 1: //salva nome
                     strcpy(contato[cont].nome,texto);
-                    //printf("Nome: %s\n", contato[cont].nome); 
                     break;
                 case 2: //salva celular
                     strcpy(contato[cont].celular,texto);
-                    //printf("Celular: %s\n", contato[cont].celular);
                     break;
                 case 3: //salva codigo
                     contato[cont].codigo = strtol(texto, NULL, 10); //transforma char em int
-                    //printf("Codigo: %i\n", contato[cont].codigo);
                     break;
                 case 4: //salva email
                     strcpy(contato[cont].email,texto);
-                    //printf("Email: %s\n", contato[cont].email);
                     linha=0;
                     cont++;
                     break;
@@ -198,7 +191,7 @@ int main()
                 fflush(stdin);
                 validarEmail(contato[cont].email);
             }
-            contato[cont].codigo = cont + 1;
+            contato[cont].codigo = cont;
             cont++;
             printf("Contato criado com sucesso!\n");
             break;
@@ -207,7 +200,7 @@ int main()
             printf(" -=!EXCLUIR CONTATO!=- \n");
             listar(contato, cont);
             int excluir = validaCodigo(cont);
-            contato[excluir - 1].codigo = contato[excluir - 1].codigo * -1;
+            contato[excluir].codigo = contato[excluir].codigo * -1;
             break;
 
         case 3: //Alterar Contatos
@@ -224,44 +217,44 @@ int main()
             switch(selecione){
                 case 1: 
                     printf("Digite o novo nome: ");
-                    scanf("%s", contato[alterar - 1].nome);
-                    printf("OK! Nome do contato %d alterado para %s\n",alterar,contato[alterar-1].nome);
+                    scanf("%s", contato[alterar].nome);
+                    printf("OK! Nome do contato %d alterado para %s\n",alterar,contato[alterar].nome);
                     break;
 
                 case 2:
                     printf("Digite o novo email: ");
-                    scanf("%s", contato[alterar - 1].email);
-                    while (validarEmail(contato[alterar - 1].email)==false)
+                    scanf("%s", contato[alterar].email);
+                    while (validarEmail(contato[alterar].email)==false)
                     {
                         printf("E-mail invalido \nDigite o email: ");
-                        scanf("%s", &contato[alterar - 1].email);
+                        scanf("%s", &contato[alterar].email);
                         fflush(stdin);
-                        validarEmail(contato[alterar - 1].email);
+                        validarEmail(contato[alterar].email);
                     }
-                    printf("OK! Email do contato %d alterado para %s\n",alterar,contato[alterar-1].email);
+                    printf("OK! Email do contato %d alterado para %s\n",alterar,contato[alterar].email);
                     break;
 
                 case 3:
                     printf("Digite o novo celular: ");
-                    scanf("%s", contato[alterar - 1].celular);
-                    printf("OK! Celular do contato %d alterado para %s\n",alterar,contato[alterar-1].celular);
+                    scanf("%s", contato[alterar].celular);
+                    printf("OK! Celular do contato %d alterado para %s\n",alterar,contato[alterar].celular);
                     break;
 
                 case 4:
                     printf("Digite o nome: ");
-                    scanf("%s", &contato[alterar - 1].nome);
+                    scanf("%s", &contato[alterar].nome);
                     fflush(stdin);
                     printf("Digite o numero: ");
-                    scanf("%s", &contato[alterar - 1].celular);
+                    scanf("%s", &contato[alterar].celular);
                     printf("Digite o email: ");
-                    scanf("%s", &contato[alterar - 1].email);
+                    scanf("%s", &contato[alterar].email);
                     fflush(stdin);
-                    while (validarEmail(contato[alterar - 1].email)==false)
+                    while (validarEmail(contato[alterar].email)==false)
                     {
                         printf("E-mail invalido \nDigite o email: ");
-                        scanf("%s", &contato[alterar - 1].email);
+                        scanf("%s", &contato[alterar].email);
                         fflush(stdin);
-                        validarEmail(contato[alterar - 1].email);
+                        validarEmail(contato[alterar].email);
                     }
                     printf("OK! Informacoes do contato alteradas\n");
                     break;
@@ -278,7 +271,7 @@ int main()
 
         case 5:    
             printf(" -=!LOCALIZAR CONTATOS!=- \n");
-            int resultadoDaBusca[100];
+            int resultadoDaBusca[1000];
             int op;
             char pesquisa[50];
             printf("Digite o nome do contato: \n");
@@ -291,33 +284,31 @@ int main()
 
 	        memcpy(b, pesquisa, strlen(pesquisa)+1);
 
-            for (int i = 0; i < cont ;i++){
+            for (int i = 1; i < cont ;i++){
                 memcpy(a, contato[i].nome, strlen(contato[i].nome)+1);
                 op = levenshtein(a, strlen(a), b, strlen(b));
                 if(op>=1 && op <= 5 || (strcmp (a, b) == 0)){
-                   printf("%d i=%d\n",op ,i);
-
+                   //printf("%d i=%d\n",op ,i);
                    if(resultadoDaBusca[op] == NULL){
                      resultadoDaBusca[op] = i;
                    }
                    else  
                    {
-                       ++jaexiste;
-                       resultadoDaBusca[op+jaexiste] = i;
+                       for (int z = 100; op + 1 <= z; z--){
+                         resultadoDaBusca[z] = resultadoDaBusca[z - 1];
+                       }
+                       resultadoDaBusca[op+1] = i;     
                    }
                 }
                 memset(a,0,50);
             }
+           
             int contzero=0;
             for (int i = 0; i < 100; i++){
                 //printf("%d ",i);
                 if(resultadoDaBusca[i]!=NULL){
                     int posicao = resultadoDaBusca[i];
                     printf("%s\n", contato[posicao].nome);
-                } else if(resultadoDaBusca[i]== 0 && contzero == 0){
-                    int posicao = resultadoDaBusca[i];
-                    printf("%s\n", contato[0].nome);
-                    ++contzero;
                 }
             }
             
