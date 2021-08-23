@@ -53,13 +53,13 @@ int min(int a, int b, int c) {
 }
 
 //Função que válida o código de usuário
-int validaCodigo(int cont)
+int validaCodigo(Lista contato[], int cont)
 {
     int codigo;
     printf("Escolha o codigo do contato que deseja alterar:");
     scanf("%i", &codigo);
 
-    while (codigo < 1 || codigo >= cont + 1)
+    while ((codigo < 1 || codigo >= cont) || contato[codigo].codigo != codigo )
     { //valida se o codigo existe
         printf("Codigo inexistente, tente novamente: ");
         scanf("%i", &codigo);
@@ -201,7 +201,7 @@ int main()
         case 2: //Excluir Contatos
             printf(" -=!EXCLUIR CONTATO!=- \n");
             listar(contato, cont);
-            int excluir = validaCodigo(cont);
+            int excluir = validaCodigo(contato, cont);
             contato[excluir].codigo = contato[excluir].codigo * -1;
             printf("Contato %i excluido!\n", excluir);
             break;
@@ -209,7 +209,7 @@ int main()
         case 3: //Alterar Contatos
             printf(" -=!ALTERAR CONTATO EXISTENTE!=- \n");
             listar(contato, cont); //printa os contatos com numero na frente
-            int alterar = validaCodigo(cont);
+            int alterar = validaCodigo(contato, cont);
             printf("Digite: 1 para alterar nome. \n");
             printf("Digite: 2 para alterar email. \n");
             printf("Digite: 3 para alterar celular. \n");
