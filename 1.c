@@ -52,7 +52,7 @@ int min(int a, int b, int c) {
 	return min;
 }
 
-//Função que válida se o código de usuário
+//Função que válida o código de usuário
 int validaCodigo(int cont)
 {
     int codigo;
@@ -74,7 +74,7 @@ int listar(Lista contato[], int cont)
     printf(" -=!CONTATOS!=- \n");
     for (int i = 1; i <= cont; i++)
     {
-        if (contato[i].codigo > 0)
+        if (contato[i].codigo > 0) //Só mostra os codigos positivos
         {
             printf("Codigo de Identificacao: %d\n", contato[i].codigo);
             printf("Nome: %s\n", contato[i].nome);
@@ -88,7 +88,7 @@ int listar(Lista contato[], int cont)
 //Função que salva os contatos no arquivo "contato.txt"
 int salvar(Lista contato[], int cont){
     char pulalinha[2]="\n";
-    FILE *arquivo = fopen("contato.txt","w");
+    FILE *arquivo = fopen("contato.txt","w"); 
     for (int i = 1; i < cont; i++){
         int retorno = fputs(contato[i].nome,arquivo);
         int pula = fputs(pulalinha,arquivo);
@@ -105,6 +105,7 @@ int salvar(Lista contato[], int cont){
     fclose(arquivo);
 }
 
+//Função que valida se o email possui @
 bool validarEmail(char email[36]){
 
     char *verificaEmail;
@@ -180,6 +181,7 @@ int main()
             fflush(stdin);
             printf("Digite o numero: ");
             scanf("%s", &contato[cont].celular);
+            fflush(stdin);
             printf("Digite o email: ");
             scanf("%s", &contato[cont].email);
             fflush(stdin);
@@ -191,7 +193,7 @@ int main()
                 fflush(stdin);
                 validarEmail(contato[cont].email);
             }
-            contato[cont].codigo = cont;
+            contato[cont].codigo = cont; //Define um codigo para o contato
             cont++;
             printf("Contato criado com sucesso!\n");
             break;
@@ -201,6 +203,7 @@ int main()
             listar(contato, cont);
             int excluir = validaCodigo(cont);
             contato[excluir].codigo = contato[excluir].codigo * -1;
+            printf("Contato %i excluido!\n", excluir);
             break;
 
         case 3: //Alterar Contatos
@@ -321,7 +324,7 @@ int main()
             x = 0; //sai do while, fechando o programa 
             break;
 
-        default: //Não escolheu um numero entre 1 a 5
+        default: //Não escolheu um numero entre 1 a 6
             printf("Opcao invalida, tente novamente!\n");
             break;
         }
