@@ -6,7 +6,7 @@
 typedef struct
 {
     char nome[30];
-    char celular[12];
+    char celular[14];
     char email[36];
     int codigo;
 } Lista;
@@ -250,6 +250,7 @@ int main()
                     getchar();
                     gets(contato[alterar].nome);
                     printf("Digite o numero: ");
+                    getchar();
                     gets(contato[alterar].celular);
                     printf("Digite o email: ");
                     scanf("%s", &contato[alterar].email);
