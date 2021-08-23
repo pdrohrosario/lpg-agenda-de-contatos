@@ -178,11 +178,9 @@ int main()
             printf(" -=!REGISTRAR CONTATO!=- \n");
             printf("Digite o nome: ");
             getchar();
-            fgets(contato[cont].nome, 30, stdin);
-            fflush(stdin);
+            gets(contato[cont].nome);
             printf("Digite o numero: ");
-            getchar();
-            fgets(contato[cont].celular, 12, stdin);
+            gets(contato[cont].celular);
             fflush(stdin);
             printf("Digite o email: ");
             scanf("%s", &contato[cont].email);
@@ -223,13 +221,13 @@ int main()
                 case 1: 
                     printf("Digite o novo nome: ");
                     getchar();
-                    fgets(contato[alterar].nome, 30, stdin);
+                    gets(contato[alterar].nome, 30, stdin);
                     printf("OK! Nome do contato %d alterado para %s\n",alterar,contato[alterar].nome);
                     break;
 
                 case 2:
                     printf("Digite o novo email: ");
-                    scanf("%s", contato[alterar].email);
+                    gets(contato[alterar].email);
                     while (validarEmail(contato[alterar].email)==false)
                     {
                         printf("E-mail invalido \nDigite o email: ");
@@ -243,18 +241,16 @@ int main()
                 case 3:
                     printf("Digite o novo celular: ");
                     getchar();
-                    fgets(contato[alterar].celular, 12, stdin);
+                    gets(contato[alterar].celular, 12, stdin);
                     printf("OK! Celular do contato %d alterado para %s\n",alterar,contato[alterar].celular);
                     break;
 
                 case 4:
                     printf("Digite o nome: ");
                     getchar();
-                    fgets(contato[alterar].nome, 30, stdin);
-                    fflush(stdin);
+                    gets(contato[alterar].nome, 30, stdin);
                     printf("Digite o numero: ");
-                    getchar();
-                    fgets(contato[alterar].celular, 12, stdin);
+                    gets(contato[alterar].celular, 12, stdin);
                     printf("Digite o email: ");
                     scanf("%s", &contato[alterar].email);
                     fflush(stdin);
