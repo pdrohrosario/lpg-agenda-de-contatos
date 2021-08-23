@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-
+//Alunos: Thiago Henrique Junkes; Pedro Rosario; Wagner Gomes; Lucas Felipe Pereira; Tiago Graciotto.
 typedef struct
 {
     char nome[30];
