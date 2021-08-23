@@ -221,7 +221,7 @@ int main()
                 case 1: 
                     printf("Digite o novo nome: ");
                     getchar();
-                    gets(contato[alterar].nome, 30, stdin);
+                    gets(contato[alterar].nome);
                     printf("OK! Nome do contato %d alterado para %s\n",alterar,contato[alterar].nome);
                     break;
 
@@ -241,16 +241,16 @@ int main()
                 case 3:
                     printf("Digite o novo celular: ");
                     getchar();
-                    gets(contato[alterar].celular, 12, stdin);
+                    gets(contato[alterar].celular);
                     printf("OK! Celular do contato %d alterado para %s\n",alterar,contato[alterar].celular);
                     break;
 
                 case 4:
                     printf("Digite o nome: ");
                     getchar();
-                    gets(contato[alterar].nome, 30, stdin);
+                    gets(contato[alterar].nome);
                     printf("Digite o numero: ");
-                    gets(contato[alterar].celular, 12, stdin);
+                    gets(contato[alterar].celular);
                     printf("Digite o email: ");
                     scanf("%s", &contato[alterar].email);
                     fflush(stdin);
