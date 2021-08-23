@@ -177,10 +177,12 @@ int main()
         case 1: //Criar novos Contatos
             printf(" -=!REGISTRAR CONTATO!=- \n");
             printf("Digite o nome: ");
-            scanf("%s", &contato[cont].nome);
+            getchar();
+            fgets(contato[cont].nome, 30, stdin);
             fflush(stdin);
             printf("Digite o numero: ");
-            scanf("%s", &contato[cont].celular);
+            getchar();
+            fgets(contato[cont].celular, 12, stdin);
             fflush(stdin);
             printf("Digite o email: ");
             scanf("%s", &contato[cont].email);
@@ -220,7 +222,8 @@ int main()
             switch(selecione){
                 case 1: 
                     printf("Digite o novo nome: ");
-                    scanf("%s", contato[alterar].nome);
+                    getchar();
+                    fgets(contato[alterar].nome, 30, stdin);
                     printf("OK! Nome do contato %d alterado para %s\n",alterar,contato[alterar].nome);
                     break;
 
@@ -239,16 +242,19 @@ int main()
 
                 case 3:
                     printf("Digite o novo celular: ");
-                    scanf("%s", contato[alterar].celular);
+                    getchar();
+                    fgets(contato[alterar].celular, 12, stdin);
                     printf("OK! Celular do contato %d alterado para %s\n",alterar,contato[alterar].celular);
                     break;
 
                 case 4:
                     printf("Digite o nome: ");
-                    scanf("%s", &contato[alterar].nome);
+                    getchar();
+                    fgets(contato[alterar].nome, 30, stdin);
                     fflush(stdin);
                     printf("Digite o numero: ");
-                    scanf("%s", &contato[alterar].celular);
+                    getchar();
+                    fgets(contato[alterar].celular, 12, stdin);
                     printf("Digite o email: ");
                     scanf("%s", &contato[alterar].email);
                     fflush(stdin);
