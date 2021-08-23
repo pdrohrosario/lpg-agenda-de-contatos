@@ -287,8 +287,8 @@ int main()
             for (int i = 1; i < cont ;i++){
                 memcpy(a, contato[i].nome, strlen(contato[i].nome)+1);
                 op = levenshtein(a, strlen(a), b, strlen(b));
-                if(op>=1 && op <= 5 || (strcmp (a, b) == 0)){
-                   //printf("%d i=%d\n",op ,i);
+                if(op>=1 && op <= 5 || (strcmp (a, b) == 0) && contato[i].codigo > 0) {
+                   printf("%d i=%d\n",op ,i);
                    if(resultadoDaBusca[op] == NULL){
                      resultadoDaBusca[op] = i;
                    }
