@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 //Alunos: Thiago Henrique Junkes; Pedro Rosario; Wagner Gomes; Lucas Felipe Pereira; Tiago Graciotto.
+//Repositório do GITHUB: https://github.com/pdrohrosario/lpg-agenda-de-contatos - branch:oficial
 typedef struct
 {
     char nome[30];
